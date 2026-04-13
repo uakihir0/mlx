@@ -66,7 +66,7 @@ TEST_CASE("test default stream in threads") {
 }
 
 TEST_CASE("test access stream in other thread") {
-  if (!metal::is_available()) {
+  if (!gpu::is_available()) {
     return;
   }
 
@@ -87,6 +87,8 @@ TEST_CASE("test access stream in other thread") {
 }
 
 TEST_CASE("test get streams") {
+  // Initialize default CPU stream before querying
+  default_stream(Device::cpu);
   auto streams = get_streams();
 
   // At least the default CPU stream exists
